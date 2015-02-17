@@ -6,14 +6,14 @@ root = bpy.utils.script_path_user()
 sep = os.sep
 
 
-#verifier l'existance de brosse IK ds les data
+#check if IK in data
 ikbrushexist = False  
 for item in bpy.data.brushes:
     if item.name.endswith("IK"):
         ikbrushexist = True  
     
     
-#charger et décharger IK Brushes
+#Load / reload IK Brushes
 #Libraries Brushes
 if ikbrushexist == False:  
     filepath = root + sep + "addons" + sep + "sculpt_brushes" + sep + "Brushes_IK.blend"
@@ -32,18 +32,18 @@ else:
                 print(brush)
                 bpy.data.brushes.remove(brush)
 
-#charger le script main_brush.py
+#Load script main_brush.py
 def execscript():
     lien = root + sep + "addons" + sep + "sculpt_brushes" + sep + "main_brush.py"
     bpy.ops.script.python_file_run( filepath = lien )
 
 
-#Efacer image non utiliser
+#remove texturs
 for textures in bpy.data.textures:
     if not textures.users:
         bpy.data.textures.remove(textures)                
 
 
 
-#charger le script main_brush.py
+#Load script main_brush.py
 execscript()

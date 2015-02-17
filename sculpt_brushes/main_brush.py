@@ -39,7 +39,8 @@ def initViewOptions(scn):
     scn['Ikb'] = False
     return
 
-#initier les boutons bool dans la scène
+
+#init bool button  in scene
 initViewOptions(bpy.context.scene)
 
 
@@ -73,7 +74,7 @@ class VIEW3D_PT_brush(Panel, View3DPaintPanelBrush):
 
         
         
-        # Particle Mode #
+        # Particle Mode 
         if context.particle_edit_object:
             tool = settings.tool
 
@@ -99,7 +100,7 @@ class VIEW3D_PT_brush(Panel, View3DPaintPanelBrush):
                 layout.prop(brush, "puff_mode", expand=True)
                 layout.prop(brush, "use_puff_volume")
 
-        # Sculpt Mode #
+        # Sculpt Mode 
         elif context.sculpt_object and brush:
             capabilities = brush.sculpt_capabilities
 
@@ -169,7 +170,7 @@ class View3DPaintPanel(UnifiedPaintPanel):
     bl_space_type = 'VIEW_3D'
     bl_region_type = 'TOOLS'
 
-# Used in both the View3D toolbar and texture properties
+#toolbar and texture properties
 def brushoption_texture_settings(layout, brush, sculpt):
     tex_slot = brush.texture_slot
 
@@ -272,11 +273,11 @@ class VIEW3D_Alpha_brush_texture(Panel, View3DPaintPanel):
         
  
 
-#fonction changer de brosse
+#fonction switch brush 
 def setB(Bname):
     bpy.context.tool_settings.sculpt.brush = bpy.data.brushes[Bname]
 
-#operateur changer de brosse
+#operator switch brush 
 class OperatorRemplacer(bpy.types.Operator):
     bl_idname = "object.operator_remplacer"
     bl_label = "Change broshes"
@@ -289,14 +290,14 @@ class OperatorRemplacer(bpy.types.Operator):
             print("Hello world from %s!" % self.chemin)
             Bname = self.chemin
         
-        #executer fonction changer de brosse
+        #execut fonction switch brush 
         setB(Bname)
   
         return {'FINISHED'}
 
 
 
-#ajouter ds liste bouton et icone
+#Add button in list & icone
 def buldB(listebrush = []): 
     #build the sculpt brush list
     for items in bpy.data.brushes:
@@ -314,12 +315,12 @@ def buldI(nameI = []):
     return nameI
 
     
-#charger le script main_brush.py
+#Load script main_brush.py
 def execscript(listebrush = []):
     lien = root + sep + "addons" + sep + "sculpt_brushes" + sep + "main_brush.py"
     bpy.ops.script.python_file_run( filepath = lien )
 
-#operateur charger main_brush.py
+#operator Load main_brush.py
 class ReloadOperator(bpy.types.Operator):
     """Tooltip"""
     bl_idname = "object.reload_operator"
@@ -330,12 +331,12 @@ class ReloadOperator(bpy.types.Operator):
         return {'FINISHED'}
 
 
-#charger le script loadik.py
+#Load script loadik.py
 def execscriptik():
     lien = root + sep + "addons" + sep + "sculpt_brushes" + sep + "loadik.py"
     bpy.ops.script.python_file_run( filepath = lien )
 
-#operateur charger loadik.py
+#operator Load loadik.py
 class LoadikOperator(bpy.types.Operator):
     """Tooltip"""
     bl_idname = "object.loadik_operator"
@@ -346,7 +347,7 @@ class LoadikOperator(bpy.types.Operator):
         return {'FINISHED'}
 
 
-#liste bouton
+#list button
 liste = buldB()
 nameIcon = buldI()
 
@@ -354,7 +355,7 @@ globalID = int(len(nameIcon))-1
 countBrush = str(len(liste)) + ' : Brushes '
 
 def ikexist():
-    #verifier l'existance de brosse IK ds les data
+    #Ask if IK in data brushes
     ikbrushexist = False  
     for item in bpy.data.brushes:
         if item.name.endswith("IK"):
@@ -362,7 +363,7 @@ def ikexist():
     return ikbrushexist  
 
 
-#layout afichage de brosse
+#layout brushes
 class BrushPanel(bpy.types.Panel):
     bl_label = "Brushes"
     bl_idname = "Brushes"
@@ -393,7 +394,7 @@ class BrushPanel(bpy.types.Panel):
             index = 0
           
      
-            #bouton
+            #button
             for items in liste:
                 col = split.column(align=True)
                 col.label(text=countBrush, icon = 'SCULPTMODE_HLT')

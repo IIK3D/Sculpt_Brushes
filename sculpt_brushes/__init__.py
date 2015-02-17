@@ -26,12 +26,12 @@ root = bpy.utils.script_path_user()
 sep = os.sep
 
 
-#charger le script main_brush.py
+#Load script main_brush.py
 def execscript():
     lien = root + sep + "addons" + sep + "sculpt_brushes" + sep + "main_brush.py"
     bpy.ops.script.python_file_run( filepath = lien )
 
-#operateur charger main_brush.py
+#operateur Load main_brush.py
 class ReloadOperator(bpy.types.Operator):
     """Tooltip"""
     bl_idname = "object.reload_operator"
@@ -46,13 +46,13 @@ class ReloadOperator(bpy.types.Operator):
         return {'FINISHED'}
 
     
-#charger le script main_brush.py
+#Load script main_brush.py
 def gosculpt():
     bpy.ops.script.python_file_run( filepath = lien )
 
 
  
-#layout afichage de brosse
+#layout 
 class BrushPanel(bpy.types.Panel):
     bl_label = "Brushes"
     bl_idname = "Brushes"
